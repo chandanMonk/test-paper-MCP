@@ -11,8 +11,14 @@
       "name": "S10 · Analytics · In admin · Desktop 1440",
       "slug": "s10-analytics",
       "nodeId": "VUT-0",
-      "route": null,
-      "status": "todo"
+      "route": "app/routes/app.analytics.html",
+      "screenshot": "design/screenshots/s10-analytics.jpg",
+      "status": "implemented",
+      "designFlags": [
+        "Funnel: column headers say 80 / 40 / 20 but bar labels say 80 / 49 / 11, and both arrows say 38%. Code uses 80 / 40 / 20 and calculates the % (50%).",
+        "Page still has the \"Today\" date filter, but the time-based charts it drove are gone; the tables have no date range and the funnel has its own \"All time\" label. Confirm whether the filter stays and what it filters.",
+        "Admin sidebar, top bar and Sidekick bar are Shopify chrome and were not implemented."
+      ]
     }
   ]
 }

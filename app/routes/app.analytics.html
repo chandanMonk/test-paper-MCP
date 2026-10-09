@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="shopify-api-key" content="%SHOPIFY_API_KEY%" />
+  <title>Analytics — Wishlist</title>
+  <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
+  <script type="module" src="https://cdn.shopify.com/shopifycloud/app-home/assets/latest/app-home.js"></script>
+  <link rel="stylesheet" href="../shared/app.css" />
+  <script src="../shared/charts.js"></script>
+  <script src="../data/analytics.sample.js"></script>
+</head>
+<body>
+  <s-page heading="Analytics" inlineSize="base">
+    <s-button slot="secondary-actions" icon="calendar" commandFor="range-menu" command="--toggle">Today</s-button>
+    <s-menu id="range-menu" accessibilityLabel="Date range">
+      <s-button>Today</s-button>
+      <s-button>Last 7 days</s-button>
+      <s-button>Last 30 days</s-button>
+      <s-button>All time</s-button>
+    </s-menu>
+
+    <s-section heading="Product breakdown" padding="none">
+      <s-table paginate hasNextPage>
+        <s-search-field slot="filters" label="Search products" labelAccessibilityVisibility="exclusive" placeholder="Search products"></s-search-field>
+        <s-table-header-row>
+          <s-table-header listSlot="primary">Product name</s-table-header>
+          <s-table-header format="numeric">Saved</s-table-header>
+          <s-table-header format="numeric">Orders</s-table-header>
+          <s-table-header>Last date added</s-table-header>
+          <s-table-header></s-table-header>
+        </s-table-header-row>
+        <s-table-body>
+          <s-table-row>
+            <s-table-cell>
+              <s-stack direction="inline" gap="small" alignItems="center">
+                <s-thumbnail size="small" alt="Product A"></s-thumbnail>
+                <s-stack>
+                  <s-text>Product A</s-text>
+                  <s-text color="subdued">Variant small</s-text>
+                </s-stack>
+              </s-stack>
+            </s-table-cell>
+            <s-table-cell>241</s-table-cell>
+            <s-table-cell>60</s-table-cell>
+            <s-table-cell>24 Nov, 2025</s-table-cell>
+            <s-table-cell><s-link href="shopify://admin/products/1">View product</s-link></s-table-cell>
+          </s-table-row>
+          <s-table-row>
+            <s-table-cell>
+              <s-stack direction="inline" gap="small" alignItems="center">
+                <s-thumbnail size="small" alt="Product B"></s-thumbnail>
+                <s-text>Product B</s-text>
+              </s-stack>
+            </s-table-cell>
+            <s-table-cell>187</s-table-cell>
+            <s-table-cell>73</s-table-cell>
+            <s-table-cell>24 Nov, 2025</s-table-cell>
+            <s-table-cell><s-link href="shopify://admin/products/2">View product</s-link></s-table-cell>
+          </s-table-row>
+        </s-table-body>
+      </s-table>
+    </s-section>
+
+    <s-section>
+      <s-stack gap="base">
+        <s-stack direction="inline" justifyContent="space-between" alignItems="start" gap="base">
+          <s-stack gap="small-300">
+            <s-heading>Conversion pipeline</s-heading>
+            <s-text>Conversion pipeline funnel shows how customer's wishlist adds move through to cart and purchase.</s-text>
+          </s-stack>
+          <s-stack direction="inline" gap="small-300" alignItems="center">
+            <s-icon type="calendar" size="small"></s-icon>
+            <s-text color="subdued">All time</s-text>
+          </s-stack>
+        </s-stack>
+        <s-grid gridTemplateColumns="1fr 1fr 1fr" gap="base" id="funnel-headers"></s-grid>
+        <div id="funnel"></div>
+        <s-banner tone="info">
+          The count is filtered by Wishlist-add date. Cart and Purchase actions still count under that same Wishlist action, even if they happen later. e.g. An item is added to wishlist in June and purchased in August, the data point still counts under June.
+        </s-banner>
+      </s-stack>
+    </s-section>
+
+    <s-section heading="Customers" padding="none">
+      <s-table paginate hasNextPage>
+        <s-search-field slot="filters" label="Search customers" labelAccessibilityVisibility="exclusive" placeholder="Search customers"></s-search-field>
+        <s-table-header-row>
+          <s-table-header listSlot="primary">Customer email</s-table-header>
+          <s-table-header listSlot="inline">Type</s-table-header>
+          <s-table-header format="numeric">Items in wishlist</s-table-header>
+          <s-table-header>Last wishlisted on</s-table-header>
+          <s-table-header></s-table-header>
+        </s-table-header-row>
+        <s-table-body>
+          <s-table-row>
+            <s-table-cell>john@example.com</s-table-cell>
+            <s-table-cell><s-badge tone="success">Signed-in Customer</s-badge></s-table-cell>
+            <s-table-cell>241</s-table-cell>
+            <s-table-cell>24 Nov, 2025</s-table-cell>
+            <s-table-cell><s-link href="#">View wishlist</s-link></s-table-cell>
+          </s-table-row>
+          <s-table-row>
+            <s-table-cell>maria@example.com</s-table-cell>
+            <s-table-cell><s-badge tone="info">Guest</s-badge></s-table-cell>
+            <s-table-cell>187</s-table-cell>
+            <s-table-cell>24 Nov, 2025</s-table-cell>
+            <s-table-cell><s-link href="#">View wishlist</s-link></s-table-cell>
+          </s-table-row>
+        </s-table-body>
+      </s-table>
+    </s-section>
+  </s-page>
+
+  <script>
+    const data = window.SampleData.analytics;
+    const { funnel } = window.WishlistCharts;
+
+    document.getElementById('funnel-headers').innerHTML = data.funnel.map(s => `
+      <s-stack gap="small-200"><s-text>${s.label}</s-text><s-text type="strong">${s.value}</s-text></s-stack>`).join('');
+    funnel(document.getElementById('funnel'), data.funnel);
+  </script>
+</body>
+</html>
