@@ -16,7 +16,7 @@
       "status": "implemented",
       "designFlags": [
         "Funnel: column headers say 80 / 40 / 20 but bar labels say 80 / 49 / 11, and both arrows say 38%. Code uses 80 / 40 / 20 and calculates the % (50%).",
-        "Sales chart y-axis reads $0, $100, $200, $400 on evenly spaced lines. Code uses $300 for the top line so the scale is linear.",
+        "Saves card is full width but its chart stays ~440px wide on the left, with the legend on the far right. Code matches this (chart capped at 440px). Confirm the chart shouldn't stretch to the card width.",
         "Admin sidebar, top bar and Sidekick bar are Shopify chrome and were not implemented."
       ]
     }
