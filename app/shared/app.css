@@ -1,0 +1,25 @@
+/* Only custom CSS in the app. Everything else is Polaris web components. */
+:root {
+  --chart-primary: #3E8CEB;
+  --chart-secondary: #9CC4F5;
+  --chart-grid: #EBEBEB;
+  --chart-axis: #616161;
+  --funnel-bar: #1974B1;
+}
+
+.chart { display: block; inline-size: 100%; block-size: auto; overflow: visible; }
+.chart .grid line { stroke: var(--chart-grid); }
+.chart .axis { font: 11px/1 system-ui, sans-serif; fill: var(--chart-axis); }
+
+.legend-swatch { display: inline-block; inline-size: 12px; border-top: 2px solid var(--chart-primary); vertical-align: middle; }
+.legend-swatch.dashed { border-top: 2px dashed var(--chart-secondary); }
+
+.funnel svg { display: block; inline-size: 100%; block-size: auto; }
+.funnel .bar { fill: var(--funnel-bar); }
+.funnel .divider { stroke: var(--chart-grid); }
+.funnel .pill rect { fill: var(--funnel-bar); }
+.funnel .pill text { font: 600 13px/1 system-ui, sans-serif; fill: #FFFFFF; }
+.funnel .tip rect { fill: #FFFFFF; stroke: #E3E3E3; }
+.funnel .tip text { font: 13px/1 system-ui, sans-serif; fill: #4A4A4A; }
+
+.metric { font-size: 20px; }

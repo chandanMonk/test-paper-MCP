@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="shopify-api-key" content="%SHOPIFY_API_KEY%" />
+  <title>Settings — Wishlist</title>
+  <script src="https://cdn.shopify.com/shopifycloud/app-bridge.js"></script>
+  <script type="module" src="https://cdn.shopify.com/shopifycloud/app-home/assets/latest/app-home.js"></script>
+  <link rel="stylesheet" href="../shared/app.css" />
+</head>
+<body>
+  <s-page heading="Settings" inlineSize="base">
+    <s-button slot="primary-action" variant="primary">Save</s-button>
+
+    <s-section heading="Wishlist button">
+      <s-stack gap="base">
+        <s-switch label="Show wishlist button on product pages" checked></s-switch>
+        <s-switch label="Allow guests to save items"></s-switch>
+        <s-text-field label="Button label" value="Add to wishlist"></s-text-field>
+      </s-stack>
+    </s-section>
+
+    <s-section heading="Notifications">
+      <s-choice-list label="Email customers when a saved item" name="notify" multiple>
+        <s-choice value="back-in-stock" selected>Is back in stock</s-choice>
+        <s-choice value="price-drop">Drops in price</s-choice>
+      </s-choice-list>
+    </s-section>
+  </s-page>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "paperFile": { "id": "01M460F0RWQYHJHEB4RTG7B0WX", "name": "Wishlist" },
+  "frames": [
+    {
+      "name": "S09 · Settings · In admin · Desktop 1440",
+      "slug": "s09-settings",
+      "route": "app/routes/app.settings.html",
+      "status": "implemented"
+    },
+    {
+      "name": "S10 · Analytics · In admin · Desktop 1440",
+      "slug": "s10-analytics",
+      "nodeId": "VUT-0",
+      "route": null,
+      "status": "todo"
+    }
+  ]
+}
