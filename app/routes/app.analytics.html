@@ -21,28 +21,6 @@
       <s-button>All time</s-button>
     </s-menu>
 
-    <s-section>
-      <s-stack gap="base">
-        <s-stack direction="inline" gap="small-300" alignItems="start">
-          <s-icon type="heart"></s-icon>
-          <s-stack gap="small-200">
-            <s-heading>Total wishlist saves</s-heading>
-            <s-text>Total items added by both Guest and Signed-in Customer.</s-text>
-            <s-text type="strong"><span class="metric" id="saves-total"></span></s-text>
-          </s-stack>
-        </s-stack>
-        <s-box maxInlineSize="440px"><div id="saves-chart"></div></s-box>
-        <s-stack direction="inline" gap="base" justifyContent="end">
-          <s-stack direction="inline" gap="small-200" alignItems="center">
-            <span class="legend-swatch"></span><s-text>Signed-in Customer</s-text>
-          </s-stack>
-          <s-stack direction="inline" gap="small-200" alignItems="center">
-            <span class="legend-swatch dashed"></span><s-text>Guest</s-text>
-          </s-stack>
-        </s-stack>
-      </s-stack>
-    </s-section>
-
     <s-section heading="Product breakdown" padding="none">
       <s-table paginate hasNextPage>
         <s-search-field slot="filters" label="Search products" labelAccessibilityVisibility="exclusive" placeholder="Search products"></s-search-field>
@@ -137,16 +115,7 @@
 
   <script>
     const data = window.SampleData.analytics;
-    const { lineChart, funnel } = window.WishlistCharts;
-
-    document.getElementById('saves-total').textContent = data.saves.total;
-
-    lineChart(document.getElementById('saves-chart'), {
-      label: 'Wishlist saves by hour, Signed-in Customer vs Guest',
-      yTicks: [0, 10, 20, 30],
-      xLabels: data.saves.xLabels,
-      series: [{ values: data.saves.guest, dashed: true }, { values: data.saves.signedIn }],
-    });
+    const { funnel } = window.WishlistCharts;
 
     document.getElementById('funnel-headers').innerHTML = data.funnel.map(s => `
       <s-stack gap="small-200"><s-text>${s.label}</s-text><s-text type="strong">${s.value}</s-text></s-stack>`).join('');
